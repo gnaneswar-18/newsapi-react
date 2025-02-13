@@ -8,7 +8,6 @@ export default class News extends Component {
             page:1
         }
        document.title=`${this.props.category}-News Monkey`
-
     }
     async update(){
         const url = `https://newsapi.org/v2/top-headlines?country=us&category=${this.props.category}&apiKey=64cc70dd99f949488819dbd4d75097ba&page=${this.state.page}&pageSize=12`;
@@ -18,7 +17,6 @@ export default class News extends Component {
     }
      componentDidMount() {
         this.update()
-        
     }
     handlePrev=()=>{
         this.setState({ page:this.state.page-1 })
