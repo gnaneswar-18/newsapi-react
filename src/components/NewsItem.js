@@ -10,7 +10,7 @@ const NewsItem = ({ title, description, imageUrl, url, author, date, source }) =
           <span
             className="position-absolute top-0 translate-middle badge rounded-pill bg-danger"
             style={{ left: '85%', zIndex: '1' }}
-          >
+          > 
             {source}
           </span>
         </h5>
