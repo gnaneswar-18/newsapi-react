@@ -7,12 +7,12 @@ const News = ({ category }) => {
     const [totalResults, setTotalResults] = useState(0);
 
     useEffect(() => {
-        document.title = `${category} - News Monkey`;
+        document.title = `${category} - NewsPulse`;
         updateNews();
     }, [category, page]);
 
     const updateNews = async () => {
-        const url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=64cc70dd99f949488819dbd4d75097ba&page=${page}&pageSize=12`;
+        const url = `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}&page=${page}&pageSize=12`;
         let data = await fetch(url);
         let parseData = await data.json();
         setArticles(parseData.articles);
@@ -21,35 +21,35 @@ const News = ({ category }) => {
 
     return (
         <div className='container my-3'>
-            <h2 className='text-center'>{`NewsMonkey - Top ${category} Headlines`}</h2>
+            <h2 className='text-center'>{`NewsPulse - Top ${category} Headlines`}</h2>
             <div className="row">
                 {articles.map((element, index) => (
                     <div className="col md-3" key={index}>
-                        <NewsItem 
-                            title={element.title ? element.title.slice(0, 40) : ""} 
-                            description={element.description ? element.description.slice(0, 80) : ""} 
-                            imageUrl={element.urlToImage} 
-                            url={element.url} 
-                            author={element.author} 
-                            date={element.publishedAt} 
-                            source={element.source.name} 
+                        <NewsItem
+                            title={element.title ? element.title.slice(0, 40) : ""}
+                            description={element.description ? element.description.slice(0, 80) : ""}
+                            imageUrl={element.urlToImage}
+                            url={element.url}
+                            author={element.author}
+                            date={element.publishedAt}
+                            source={element.source.name}
                         />
                     </div>
                 ))}
             </div>
             <div className="container d-flex justify-content-between">
-                <button 
-                    disabled={page <= 1} 
-                    type="button" 
-                    className="btn btn-dark" 
+                <button
+                    disabled={page <= 1}
+                    type="button"
+                    className="btn btn-dark"
                     onClick={() => setPage(page - 1)}
                 >
                     &larr; Previous
                 </button>
-                <button 
-                    disabled={page + 1 > Math.ceil(totalResults / 12)} 
-                    type="button" 
-                    className="btn btn-dark" 
+                <button
+                    disabled={page + 1 > Math.ceil(totalResults / 12)}
+                    type="button"
+                    className="btn btn-dark"
                     onClick={() => setPage(page + 1)}
                 >
                     Next &rarr;
